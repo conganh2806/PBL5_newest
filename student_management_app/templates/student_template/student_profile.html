@@ -20,10 +20,10 @@ Edit Profile
                 <div class="card-body">
                   <div class="form-group">
                     <label>Username</label>
-                    <input type="text" class="form-control" name="username" value="{{ user.username }}" disabled="disabled">
+                    <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" disabled="disabled">
                   </div>
                   <div class="form-group">
-                    <label>Username</label>
+                    <label>Email</label>
                     <input type="text" class="form-control" name="username" value="{{ user.email }}" disabled="disabled">
                   </div>
                    <div class="form-group">
@@ -42,6 +42,17 @@ Edit Profile
                     <label>Change Password?</label>
                     <input type="text" class="form-control" name="password" placeholder="Fill Only If You want to Change Password">
                   </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div style="margin-top:30px">
+                        <!-- <input type="url" class="form-control" id="website" placeholder="Image"> -->
+                        <input type="file" class="form-control" type="file" id="imageUpload" multiple> 
+                        <input type="hidden" name="url" id="url" />
+                        <button type="button" onclick ="uploadimage()" style=" margin-top: 30px;" title='Upload image before update your profile'>Upload Image</button> 
+                        <div type="text" id="notifyUploadDone"></div>
+                    </div>
+                  </div>
+                 
+
                    <div class="form-group">
                       {% if messages %}
                         {% for message in messages %}
@@ -55,6 +66,8 @@ Edit Profile
                       {% endif %}
                     </div>
 
+                   
+                  
                 </div>
                 <!-- /.card-body -->
 
@@ -65,12 +78,65 @@ Edit Profile
             </div>
             <!-- /.card -->
 
-
+          
 
           </div>
           </div>
       </div>
     </section>
     <!-- /.content -->
+
+    {% load static %}
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        // adding firebase data
+        var firebaseConfig = {
+            apiKey: "AIzaSyAq7-ziABaQCTxfeOlMIbv8jvfQk2B7lmQ",
+            authDomain: "pbl5-94125.firebaseapp.com",
+            databaseURL: "https://pbl5-94125-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "pbl5-94125",
+            storageBucket: "pbl5-94125.appspot.com",
+            messagingSenderId: "42461525472",
+            appId: "1:42461525472:web:e0519d8a1a0e0644f1e785",
+            measurementId: "G-K47401613X"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        var storageRef = firebase.storage().ref();
+        //uploading file in storage
+        function uploadimage() {
+            var files = document.getElementById("imageUpload").files;
+            var username = document.getElementById("username").value;
+            console.log(username);
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var storageChildRef = storageRef.child('Image').child(username).child('face_recognition').child(file.name);
+                var task = storageChildRef.put(file);
+                task.on("state_changed", function(snapshot) {
+                    // Xử lý quá trình upload
+                }, function(error) {
+                    // Xử lý lỗi
+                }, function() {
+                    // Xử lý khi upload thành công
+                    console.log("upload image done");
+                    document.getElementById("notifyUploadDone").innerHTML = "Upload image done!";
+                });
+            }
+           
+        }
+       
+        // Save message to firebase database
+        function saveMessage(url) {
+            var newMessageRef = messagesRef.push();
+            newMessageRef.set({
+                imageurl: url,
+            });
+        }
+        
+    </script>
+
 {% endblock main_content %}
 

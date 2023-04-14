@@ -5,10 +5,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+import pyrebase
 
 from student_management_app.models import Students, Courses, Subjects, CustomUser, Attendance, AttendanceReport, \
     LeaveReportStudent, FeedBackStudent, NotificationStudent, StudentResult, OnlineClassRoom, SessionYearModel
-
 
 def student_home(request):
     student_obj=Students.objects.get(admin=request.user.id)
@@ -138,6 +138,7 @@ def student_profile_save(request):
         last_name=request.POST.get("last_name")
         password=request.POST.get("password")
         address=request.POST.get("address")
+     
         try:
             customuser=CustomUser.objects.get(id=request.user.id)
             customuser.first_name=first_name

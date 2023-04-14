@@ -114,10 +114,7 @@
               </div>
             </div>
           </div>
-          <input type="file" class="form-control" placeholder="Upload at least 10 picture" id="imageUpload" multiple>
-            <input type="hidden" name="url" id="url" />
-            <button type="button" onclick ="uploadimage()" style=" margin-top: 30px;" title='Upload image before update your profile'>Upload Image</button> 
-            <div class="input-group mb-3">
+          <div class="input-group mb-3">
                   <select class="form-control" name="session_year">
                 {% for sessionyear in session_years %}
                   <option value="{{ sessionyear.id }}">{{ sessionyear.session_start_year }} - {{ sessionyear.session_end_year }}</option>
@@ -167,51 +164,7 @@
 <!-- AdminLTE App -->
 <script src="{% static "dist/js/adminlte.min.js" %}"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<script>
-  // adding firebase data
-  var firebaseConfig = {
-      apiKey: "AIzaSyAq7-ziABaQCTxfeOlMIbv8jvfQk2B7lmQ",
-      authDomain: "pbl5-94125.firebaseapp.com",
-      databaseURL: "https://pbl5-94125-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "pbl5-94125",
-      storageBucket: "pbl5-94125.appspot.com",
-      messagingSenderId: "42461525472",
-      appId: "1:42461525472:web:e0519d8a1a0e0644f1e785",
-      measurementId: "G-K47401613X"
-  };
-  
-  firebase.initializeApp(firebaseConfig);
-  var storageRef = firebase.storage().ref();
-  //uploading file in storage
-  function uploadimage() {
-      var files = document.getElementById("imageUpload").files;
-      var userName = document.getElementById("username").textContent;
-      console.log(userName);
-      for (var i = 0; i < files.length; i++) {
-          var file = files[i];
-          var storageChildRef = storageRef.child('Image').child(userName).child('face_recognition').child(file.name);
-          var task = storageChildRef.put(file);
-          task.on("state_changed", function(snapshot) {
-              // Xử lý quá trình upload
-          }, function(error) {
-              // Xử lý lỗi
-          }, function() {
-              // Xử lý khi upload thành công
-              console.log("upload image done");
-          });
-      }
-     
-  }
- 
-  // Save message to firebase database
-  function saveMessage(url) {
-      var newMessageRef = messagesRef.push();
-      newMessageRef.set({
-          imageurl: url,
-      });
-  }
-  
-</script>
+
 
 </body>
 </html>
