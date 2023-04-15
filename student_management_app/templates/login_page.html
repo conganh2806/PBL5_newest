@@ -55,18 +55,26 @@
           <div class="col-12">
             <button type="submit" class="btn btn-primary btn-block" >Sign In</button>
           </div><!-- /.col -->
-           <div class="col-12 text-center">
+           <div class="col-12 text-center" style="margin-top: 8px;">
              <a href="{% url 'password_reset' %}">Reset Password</a>
           </div><!-- /.col -->
-            <div class="col-12 text-center">
-             <a href="{% url 'signup_admin' %}">Admin Signup FOR TESTING</a>
+          <div class="col-12">
+           <div style="border-top: 1px #cdcdcd solid; margin-top: 16px;"></div>
           </div><!-- /.col -->
-                        <div class="col-12 text-center">
-             <a href="{% url 'signup_staff' %}">Staff Signup FOR TESTING</a>
-          </div><!-- /.col -->
-                                    <div class="col-12 text-center">
-             <a href="{% url 'signup_student' %}">Student Signup FOR TESTING</a>
-          </div><!-- /.col -->
+          <div class="col-12 text-center" style="margin-bottom: 18px; margin-top: 18px;">
+            <div class="title">SignUp with</div>
+         </div>
+            <div style="display: flex;">
+              <div class="col-12 text-center " style="margin-left: -40px; ">
+                <a href="{% url 'signup_admin' %}"><input type="button" value="Admin" style="width: 100px; background-color: #34AF6D; border: #13bd68 1px solid; color: #fff; border-radius: 5px;"></a>
+             </div><!-- /.col -->
+                  <div class="col-12 text-center" style="margin-left: -61px;">
+                <a href="{% url 'signup_staff' %}"><input type="button" value="Staff" style="width: 100px;background-color: #34AF6D; border: #13bd68 1px solid; color: #fff; border-radius: 5px;"></a>
+             </div><!-- /.col -->
+                      <div class="col-12 text-center" style="margin-left: -64px;">
+                <a href="{% url 'signup_student' %}"><input type="button" value="Student" style="width: 100px;background-color: #34AF6D; border: #13bd68 1px solid; color: #fff; border-radius: 5px;"></a>
+             </div><!-- /.col -->
+            </div>
         </div>
         <div class="row">
           {% if messages %}

@@ -119,7 +119,7 @@
 }
 
 .select2-container--default.select2-container--open {
-  border-color: #007bff;
+  border-color: #34AF6D;
 }
 
 .select2-container--default .select2-dropdown {
@@ -184,7 +184,7 @@
 }
 
 .select2-container--default .select2-results__option--highlighted {
-  background-color: #007bff;
+  background-color: #34AF6D;
   color: #ffffff;
 }
 
@@ -222,7 +222,7 @@
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
-  background-color: #007bff;
+  background-color: #34AF6D;
   border-color: #006fe6;
   color: #ffffff;
   padding: 0 10px;
@@ -285,7 +285,7 @@
 
 .select2-container--default .select2-primary .select2-results__option--highlighted,
 .select2-primary .select2-container--default .select2-results__option--highlighted {
-  background-color: #007bff;
+  background-color: #34AF6D;
   color: #ffffff;
 }
 
@@ -303,7 +303,7 @@
 
 .select2-container--default .select2-primary .select2-selection--multiple .select2-selection__choice,
 .select2-primary .select2-container--default .select2-selection--multiple .select2-selection__choice {
-  background-color: #007bff;
+  background-color: #34AF6D;
   border-color: #006fe6;
   color: #ffffff;
 }
@@ -971,7 +971,7 @@
 
 .select2-container--default .select2-blue .select2-results__option--highlighted,
 .select2-blue .select2-container--default .select2-results__option--highlighted {
-  background-color: #007bff;
+  background-color: #34AF6D;
   color: #ffffff;
 }
 
@@ -989,7 +989,7 @@
 
 .select2-container--default .select2-blue .select2-selection--multiple .select2-selection__choice,
 .select2-blue .select2-container--default .select2-selection--multiple .select2-selection__choice {
-  background-color: #007bff;
+  background-color: #34AF6D;
   border-color: #006fe6;
   color: #ffffff;
 }
@@ -1610,7 +1610,7 @@
 }
 
 .slider-primary .slider .slider-selection {
-  background: #007bff;
+  background: #34AF6D;
 }
 
 .slider-secondary .slider .slider-selection {
@@ -1666,7 +1666,7 @@
 }
 
 .slider-blue .slider .slider-selection {
-  background: #007bff;
+  background: #34AF6D;
 }
 
 .slider-indigo .slider .slider-selection {
@@ -1719,18 +1719,18 @@
 
 .icheck-primary > input:first-child:not(:checked):not(:disabled):hover + label::before,
 .icheck-primary > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
-  border-color: #007bff;
+  border-color: #34AF6D;
 }
 
 .icheck-primary > input:first-child:not(:checked):not(:disabled):focus + label::before,
 .icheck-primary > input:first-child:not(:checked):not(:disabled):focus + input[type="hidden"] + label::before {
-  border-color: #007bff;
+  border-color: #34AF6D;
 }
 
 .icheck-primary > input:first-child:checked + label::before,
 .icheck-primary > input:first-child:checked + input[type="hidden"] + label::before {
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #34AF6D;
+  border-color: #34AF6D;
 }
 
 .icheck-secondary > input:first-child:not(:checked):not(:disabled):hover + label::before,
@@ -1943,18 +1943,18 @@
 
 .icheck-blue > input:first-child:not(:checked):not(:disabled):hover + label::before,
 .icheck-blue > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
-  border-color: #007bff;
+  border-color: #34AF6D;
 }
 
 .icheck-blue > input:first-child:not(:checked):not(:disabled):focus + label::before,
 .icheck-blue > input:first-child:not(:checked):not(:disabled):focus + input[type="hidden"] + label::before {
-  border-color: #007bff;
+  border-color: #34AF6D;
 }
 
 .icheck-blue > input:first-child:checked + label::before,
 .icheck-blue > input:first-child:checked + input[type="hidden"] + label::before {
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #34AF6D;
+  border-color: #34AF6D;
 }
 
 .icheck-indigo > input:first-child:not(:checked):not(:disabled):hover + label::before,
@@ -2276,7 +2276,7 @@
 }
 
 #toast-container .toast {
-  background-color: #007bff;
+  background-color: #34AF6D;
 }
 
 #toast-container .toast-success {
@@ -2308,7 +2308,7 @@
 }
 
 .pace-primary .pace .pace-progress {
-  background: #007bff;
+  background: #34AF6D;
 }
 
 .pace-barber-shop-primary .pace {
@@ -2316,7 +2316,7 @@
 }
 
 .pace-barber-shop-primary .pace .pace-progress {
-  background: #007bff;
+  background: #34AF6D;
 }
 
 .pace-barber-shop-primary .pace .pace-activity {
@@ -2328,7 +2328,7 @@
 }
 
 .pace-bounce-primary .pace .pace-activity {
-  background: #007bff;
+  background: #34AF6D;
 }
 
 .pace-center-atom-primary .pace-progress {
@@ -2337,7 +2337,7 @@
 }
 
 .pace-center-atom-primary .pace-progress::before {
-  background: #007bff;
+  background: #34AF6D;
   color: #ffffff;
   font-size: .8rem;
   line-height: .7rem;
@@ -2345,11 +2345,11 @@
 }
 
 .pace-center-atom-primary .pace-activity {
-  border-color: #007bff;
+  border-color: #34AF6D;
 }
 
 .pace-center-atom-primary .pace-activity::after, .pace-center-atom-primary .pace-activity::before {
-  border-color: #007bff;
+  border-color: #34AF6D;
 }
 
 .pace-center-circle-primary .pace .pace-progress {
@@ -2358,28 +2358,28 @@
 }
 
 .pace-center-radar-primary .pace .pace-activity {
-  border-color: #007bff transparent transparent;
+  border-color: #34AF6D transparent transparent;
 }
 
 .pace-center-radar-primary .pace .pace-activity::before {
-  border-color: #007bff transparent transparent;
+  border-color: #34AF6D transparent transparent;
 }
 
 .pace-center-simple-primary .pace {
   background: #ffffff;
-  border-color: #007bff;
+  border-color: #34AF6D;
 }
 
 .pace-center-simple-primary .pace .pace-progress {
-  background: #007bff;
+  background: #34AF6D;
 }
 
 .pace-material-primary .pace {
-  color: #007bff;
+  color: #34AF6D;
 }
 
 .pace-corner-indicator-primary .pace .pace-activity {
-  background: #007bff;
+  background: #34AF6D;
 }
 
 .pace-corner-indicator-primary .pace .pace-activity::after,
@@ -2402,31 +2402,31 @@
 }
 
 .pace-flash-primary .pace .pace-progress {
-  background: #007bff;
+  background: #34AF6D;
 }
 
 .pace-flash-primary .pace .pace-progress-inner {
-  box-shadow: 0 0 10px #007bff, 0 0 5px #007bff;
+  box-shadow: 0 0 10px #34AF6D, 0 0 5px #34AF6D;
 }
 
 .pace-flash-primary .pace .pace-activity {
-  border-top-color: #007bff;
-  border-left-color: #007bff;
+  border-top-color: #34AF6D;
+  border-left-color: #34AF6D;
 }
 
 .pace-loading-bar-primary .pace .pace-progress {
-  background: #007bff;
-  color: #007bff;
+  background: #34AF6D;
+  color: #34AF6D;
   box-shadow: 120px 0 #ffffff, 240px 0 #ffffff;
 }
 
 .pace-loading-bar-primary .pace .pace-activity {
-  box-shadow: inset 0 0 0 2px #007bff, inset 0 0 0 7px #ffffff;
+  box-shadow: inset 0 0 0 2px #34AF6D, inset 0 0 0 7px #ffffff;
 }
 
 .pace-mac-osx-primary .pace .pace-progress {
-  background-color: #007bff;
-  box-shadow: inset -1px 0 #007bff, inset 0 -1px #007bff, inset 0 2px rgba(255, 255, 255, 0.5), inset 0 6px rgba(255, 255, 255, 0.3);
+  background-color: #34AF6D;
+  box-shadow: inset -1px 0 #34AF6D, inset 0 -1px #34AF6D, inset 0 2px rgba(255, 255, 255, 0.5), inset 0 6px rgba(255, 255, 255, 0.3);
 }
 
 .pace-mac-osx-primary .pace .pace-activity {
@@ -2435,7 +2435,7 @@
 }
 
 .pace-progress-color-primary .pace-progress {
-  color: #007bff;
+  color: #34AF6D;
 }
 
 .pace-secondary .pace .pace-progress {
@@ -4142,7 +4142,7 @@
 }
 
 .pace-blue .pace .pace-progress {
-  background: #007bff;
+  background: #34AF6D;
 }
 
 .pace-barber-shop-blue .pace {
@@ -4150,7 +4150,7 @@
 }
 
 .pace-barber-shop-blue .pace .pace-progress {
-  background: #007bff;
+  background: #34AF6D;
 }
 
 .pace-barber-shop-blue .pace .pace-activity {
@@ -4162,7 +4162,7 @@
 }
 
 .pace-bounce-blue .pace .pace-activity {
-  background: #007bff;
+  background: #34AF6D;
 }
 
 .pace-center-atom-blue .pace-progress {
@@ -4171,7 +4171,7 @@
 }
 
 .pace-center-atom-blue .pace-progress::before {
-  background: #007bff;
+  background: #34AF6D;
   color: #ffffff;
   font-size: .8rem;
   line-height: .7rem;
@@ -4179,11 +4179,11 @@
 }
 
 .pace-center-atom-blue .pace-activity {
-  border-color: #007bff;
+  border-color: #34AF6D;
 }
 
 .pace-center-atom-blue .pace-activity::after, .pace-center-atom-blue .pace-activity::before {
-  border-color: #007bff;
+  border-color: #34AF6D;
 }
 
 .pace-center-circle-blue .pace .pace-progress {
@@ -4192,28 +4192,28 @@
 }
 
 .pace-center-radar-blue .pace .pace-activity {
-  border-color: #007bff transparent transparent;
+  border-color: #34AF6D transparent transparent;
 }
 
 .pace-center-radar-blue .pace .pace-activity::before {
-  border-color: #007bff transparent transparent;
+  border-color: #34AF6D transparent transparent;
 }
 
 .pace-center-simple-blue .pace {
   background: #ffffff;
-  border-color: #007bff;
+  border-color: #34AF6D;
 }
 
 .pace-center-simple-blue .pace .pace-progress {
-  background: #007bff;
+  background: #34AF6D;
 }
 
 .pace-material-blue .pace {
-  color: #007bff;
+  color: #34AF6D;
 }
 
 .pace-corner-indicator-blue .pace .pace-activity {
-  background: #007bff;
+  background: #34AF6D;
 }
 
 .pace-corner-indicator-blue .pace .pace-activity::after,
@@ -4236,31 +4236,31 @@
 }
 
 .pace-flash-blue .pace .pace-progress {
-  background: #007bff;
+  background: #34AF6D;
 }
 
 .pace-flash-blue .pace .pace-progress-inner {
-  box-shadow: 0 0 10px #007bff, 0 0 5px #007bff;
+  box-shadow: 0 0 10px #34AF6D, 0 0 5px #34AF6D;
 }
 
 .pace-flash-blue .pace .pace-activity {
-  border-top-color: #007bff;
-  border-left-color: #007bff;
+  border-top-color: #34AF6D;
+  border-left-color: #34AF6D;
 }
 
 .pace-loading-bar-blue .pace .pace-progress {
-  background: #007bff;
-  color: #007bff;
+  background: #34AF6D;
+  color: #34AF6D;
   box-shadow: 120px 0 #ffffff, 240px 0 #ffffff;
 }
 
 .pace-loading-bar-blue .pace .pace-activity {
-  box-shadow: inset 0 0 0 2px #007bff, inset 0 0 0 7px #ffffff;
+  box-shadow: inset 0 0 0 2px #34AF6D, inset 0 0 0 7px #ffffff;
 }
 
 .pace-mac-osx-blue .pace .pace-progress {
-  background-color: #007bff;
-  box-shadow: inset -1px 0 #007bff, inset 0 -1px #007bff, inset 0 2px rgba(255, 255, 255, 0.5), inset 0 6px rgba(255, 255, 255, 0.3);
+  background-color: #34AF6D;
+  box-shadow: inset -1px 0 #34AF6D, inset 0 -1px #34AF6D, inset 0 2px rgba(255, 255, 255, 0.5), inset 0 6px rgba(255, 255, 255, 0.3);
 }
 
 .pace-mac-osx-blue .pace .pace-activity {
@@ -4269,7 +4269,7 @@
 }
 
 .pace-progress-color-blue .pace-progress {
-  color: #007bff;
+  color: #34AF6D;
 }
 
 .pace-indigo .pace .pace-progress {
@@ -5906,7 +5906,7 @@
 
 .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary,
 .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary {
-  background: #007bff;
+  background: #34AF6D;
   color: #ffffff;
 }
 
@@ -5990,7 +5990,7 @@
 
 .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-blue,
 .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-blue {
-  background: #007bff;
+  background: #34AF6D;
   color: #ffffff;
 }
 

@@ -288,7 +288,7 @@
     border: 0;
     border-radius: 0.25em;
     background: initial;
-    background-color: #007bff;
+    background-color: #34AF6D;
     color: #fff;
     font-size: 1.0625em; }
   .swal2-styled.swal2-cancel {
@@ -1185,16 +1185,16 @@ body.swal2-toast-column .swal2-toast {
 
 .swal2-styled.swal2-confirm {
   padding: 0.375rem 0.75rem;
-  border: 1px solid #007bff;
+  border: 1px solid #34AF6D;
   font-size: 1rem; }
   .swal2-styled.swal2-confirm:hover {
     border-color: #0062cc;
-    background-color: #0069d9; }
+    background-color: #23BB6A; }
   .swal2-styled.swal2-confirm:focus {
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }
   .swal2-styled.swal2-confirm:active {
-    border-color: #005cbf;
+    border-color: #18B05E;
     background-color: #0062cc; }
     .swal2-styled.swal2-confirm:active:focus {
       box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }
@@ -1256,8 +1256,8 @@ body.swal2-toast-column .swal2-toast {
     z-index: -1;
     opacity: 0; }
     .swal2-radio label input:checked ~ .swal2-label::before {
-      border-color: #007bff;
-      background: #007bff;
+      border-color: #34AF6D;
+      background: #34AF6D;
       color: #fff; }
     .swal2-radio label input:focus ~ .swal2-label::before {
       box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }
@@ -1305,8 +1305,8 @@ body.swal2-toast-column .swal2-toast {
     z-index: -1;
     opacity: 0; }
     .swal2-checkbox input:checked ~ .swal2-label::before {
-      border-color: #007bff;
-      background: #007bff;
+      border-color: #34AF6D;
+      background: #34AF6D;
       color: #fff; }
     .swal2-checkbox input:focus ~ .swal2-label::before {
       box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }
@@ -1371,7 +1371,7 @@ body.swal2-toast-column .swal2-toast {
     transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     border: 0;
     border-radius: 1rem;
-    background: #007bff;
+    background: #34AF6D;
     box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.1);
     -webkit-appearance: none;
             appearance: none; }
@@ -1393,7 +1393,7 @@ body.swal2-toast-column .swal2-toast {
     transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     border: 0;
     border-radius: 1rem;
-    background: #007bff;
+    background: #34AF6D;
     box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.1);
     -moz-appearance: none;
          appearance: none; }
@@ -1417,7 +1417,7 @@ body.swal2-toast-column .swal2-toast {
     transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     border: 0;
     border-radius: 1rem;
-    background: #007bff;
+    background: #34AF6D;
     box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.1);
     appearance: none; }
     .swal2-range input::-ms-thumb:active {

@@ -36757,7 +36757,7 @@ var cmap = new r.Struct({
 
 // font header
 var head = new r.Struct({
-  version: r.int32, // 0x00010000 (version 1.0)
+  // version: r.int32, // 0x00010000 (version 1.0)
   revision: r.int32, // set by font manufacturer
   checkSumAdjustment: r.uint32,
   magicNumber: r.uint32, // set to 0x5F0F3CF5

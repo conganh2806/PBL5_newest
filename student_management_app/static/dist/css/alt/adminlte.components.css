@@ -175,7 +175,7 @@ textarea.form-control.is-warning {
 }
 
 .custom-switch.custom-switch-off-primary .custom-control-input ~ .custom-control-label::before {
-  background: #007bff;
+  background: #34AF6D;
   border-color: #004a99;
 }
 
@@ -188,7 +188,7 @@ textarea.form-control.is-warning {
 }
 
 .custom-switch.custom-switch-on-primary .custom-control-input:checked ~ .custom-control-label::before {
-  background: #007bff;
+  background: #34AF6D;
   border-color: #004a99;
 }
 
@@ -539,7 +539,7 @@ textarea.form-control.is-warning {
 }
 
 .custom-switch.custom-switch-off-blue .custom-control-input ~ .custom-control-label::before {
-  background: #007bff;
+  background: #34AF6D;
   border-color: #004a99;
 }
 
@@ -552,7 +552,7 @@ textarea.form-control.is-warning {
 }
 
 .custom-switch.custom-switch-on-blue .custom-control-input:checked ~ .custom-control-label::before {
-  background: #007bff;
+  background: #34AF6D;
   border-color: #004a99;
 }
 
@@ -893,7 +893,7 @@ textarea.form-control.is-warning {
 }
 
 .custom-range.custom-range-primary::-webkit-slider-thumb {
-  background-color: #007bff;
+  background-color: #34AF6D;
 }
 
 .custom-range.custom-range-primary::-webkit-slider-thumb:active {
@@ -901,7 +901,7 @@ textarea.form-control.is-warning {
 }
 
 .custom-range.custom-range-primary::-moz-range-thumb {
-  background-color: #007bff;
+  background-color: #34AF6D;
 }
 
 .custom-range.custom-range-primary::-moz-range-thumb:active {
@@ -909,7 +909,7 @@ textarea.form-control.is-warning {
 }
 
 .custom-range.custom-range-primary::-ms-thumb {
-  background-color: #007bff;
+  background-color: #34AF6D;
 }
 
 .custom-range.custom-range-primary::-ms-thumb:active {
@@ -1453,7 +1453,7 @@ textarea.form-control.is-warning {
 }
 
 .custom-range.custom-range-blue::-webkit-slider-thumb {
-  background-color: #007bff;
+  background-color: #34AF6D;
 }
 
 .custom-range.custom-range-blue::-webkit-slider-thumb:active {
@@ -1461,7 +1461,7 @@ textarea.form-control.is-warning {
 }
 
 .custom-range.custom-range-blue::-moz-range-thumb {
-  background-color: #007bff;
+  background-color: #34AF6D;
 }
 
 .custom-range.custom-range-blue::-moz-range-thumb:active {
@@ -1469,7 +1469,7 @@ textarea.form-control.is-warning {
 }
 
 .custom-range.custom-range-blue::-ms-thumb {
-  background-color: #007bff;
+  background-color: #34AF6D;
 }
 
 .custom-range.custom-range-blue::-ms-thumb:active {
@@ -2008,7 +2008,7 @@ textarea.form-control.is-warning {
 }
 
 .card-primary:not(.card-outline) > .card-header {
-  background-color: #007bff;
+  background-color: #34AF6D;
 }
 
 .card-primary:not(.card-outline) > .card-header,
@@ -2021,7 +2021,7 @@ textarea.form-control.is-warning {
 }
 
 .card-primary.card-outline {
-  border-top: 3px solid #007bff;
+  border-top: 3px solid #34AF6D;
 }
 
 .card-primary.card-outline-tabs > .card-header a:hover {
@@ -2029,7 +2029,7 @@ textarea.form-control.is-warning {
 }
 
 .card-primary.card-outline-tabs > .card-header a.active {
-  border-top: 3px solid #007bff;
+  border-top: 3px solid #34AF6D;
 }
 
 .bg-primary .btn-tool,
@@ -3002,7 +3002,7 @@ textarea.form-control.is-warning {
 }
 
 .card-blue:not(.card-outline) > .card-header {
-  background-color: #007bff;
+  background-color: #34AF6D;
 }
 
 .card-blue:not(.card-outline) > .card-header,
@@ -3015,7 +3015,7 @@ textarea.form-control.is-warning {
 }
 
 .card-blue.card-outline {
-  border-top: 3px solid #007bff;
+  border-top: 3px solid #34AF6D;
 }
 
 .card-blue.card-outline-tabs > .card-header a:hover {
@@ -3023,7 +3023,7 @@ textarea.form-control.is-warning {
 }
 
 .card-blue.card-outline-tabs > .card-header a.active {
-  border-top: 3px solid #007bff;
+  border-top: 3px solid #34AF6D;
 }
 
 .bg-blue .btn-tool,
@@ -4251,7 +4251,7 @@ html.maximized-card {
 }
 
 .todo-list .primary {
-  border-left-color: #007bff;
+  border-left-color: #34AF6D;
 }
 
 .todo-list .secondary {
@@ -4307,7 +4307,7 @@ html.maximized-card {
 }
 
 .todo-list .blue {
-  border-left-color: #007bff;
+  border-left-color: #34AF6D;
 }
 
 .todo-list .indigo {
@@ -4938,7 +4938,7 @@ html.maximized-card {
 
 .alert-primary {
   color: #ffffff;
-  background: #007bff;
+  background: #34AF6D;
   border-color: #006fe6;
 }
 
