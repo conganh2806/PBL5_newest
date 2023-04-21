@@ -566,4 +566,3 @@ def send_staff_notification(request):
     notification.save()
     print(data.text)
     return HttpResponse("True")
-

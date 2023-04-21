@@ -1,0 +1,27 @@
+{% extends 'hod_template/base_template.html' %}
+{% block page_title %}
+Check Attendance
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Check Attendance</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <img src="{% url 'facecam_feed' %}">
+              {% comment %} <img src="https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=1200&quality=85&auto=format&fit=max&s=a52bbe202f57ac0f5ff7f47166906403"> {% endcomment %}
+            </div>
+            <!-- /.card -->
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}

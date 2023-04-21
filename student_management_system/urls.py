@@ -19,11 +19,15 @@ from django.urls import path, include
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 
-from student_management_app import views, HodViews, StaffViews, StudentViews
+from student_management_app import views, HodViews, StaffViews, StudentViews, face_recognition_views
 from student_management_app.EditResultVIewClass import EditResultViewClass
 from student_management_system import settings
 
+
+
 urlpatterns = [
+    #path('facecam_feed', face_recognition_views.facecam_feed, name='facecam_feed'),
+    # path('',face_recognition_views.facecam_feed),
     path('demo',views.showDemoPage),
     path('signup_admin',views.signup_admin,name="signup_admin"),
     path('signup_student',views.signup_student,name="signup_student"),
@@ -81,6 +85,9 @@ urlpatterns = [
     path('admin_send_notification_student', HodViews.admin_send_notification_student,name="admin_send_notification_student"),
     path('send_student_notification', HodViews.send_student_notification,name="send_student_notification"),
     path('send_staff_notification', HodViews.send_staff_notification,name="send_staff_notification"),
+    path('tocamera', face_recognition_views.index, name='tocamera'),
+    path('facecam_feed', face_recognition_views.facecam_feed, name='facecam_feed'),
+   
 
                   #     Staff URL Path
     path('staff_home', StaffViews.staff_home, name="staff_home"),
@@ -123,4 +130,5 @@ urlpatterns = [
     path('join_class_room/<int:subject_id>/<int:session_year_id>',StudentViews.join_class_room,name="join_class_room"),
     path('node_modules/canvas-designer/widget.html',StaffViews.returnHtmlWidget,name="returnHtmlWidget"),
     path('testurl/',views.Testurl)
+    
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

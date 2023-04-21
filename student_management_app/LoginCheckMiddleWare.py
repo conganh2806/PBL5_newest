@@ -17,6 +17,8 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                     pass
                 elif modulename == "django.contrib.auth.views" or modulename =="django.contrib.admin.sites":
                     pass
+                elif modulename == "student_management_app.face_recognition_views":
+                    pass
                 else:
                     return HttpResponseRedirect(reverse("admin_home"))
             elif user.user_type == "2":
