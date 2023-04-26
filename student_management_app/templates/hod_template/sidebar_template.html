@@ -183,7 +183,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          {% comment %} <li class="nav-item">
             {% url 'tocamera' as tocamera %}
             <a href="{% url 'tocamera' %}" class="nav-link {% if request.path == tocamera %} active {% endif %}">
               <i class="nav-icon fas fa-th"></i>
@@ -191,7 +191,7 @@
                 Camera
               </p>
             </a>
-          </li>
+          </li> {% endcomment %}
 
         </ul>
       </nav>

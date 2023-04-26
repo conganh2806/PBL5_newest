@@ -52,6 +52,7 @@ Manage Staff
                       <td>{{ staff.admin.last_login }}</td>
                       <td>{{ staff.admin.date_joined }}</td>
                       <td><a href="/edit_staff/{{ staff.admin.id }}" class="btn btn-success">Edit</a></td>
+                      <td><a href="/kick_staff/{{ staff.admin.id }}" class="btn btn-success">Kick</a></td>
                     </tr>
                   {% endfor %}
                   </tbody>

@@ -90,6 +90,7 @@ def add_staff_save(request):
         except:
             messages.error(request,"Failed to Add Staff")
             return HttpResponseRedirect(reverse("add_staff"))
+       
 
 def add_course(request):
     return render(request,"hod_template/add_course_template.html")
@@ -186,7 +187,7 @@ def manage_staff(request):
 def manage_student(request):
     students=Students.objects.all()
     return render(request,"hod_template/manage_student_template.html",{"students":students})
-
+    
 def manage_course(request):
     courses=Courses.objects.all()
     return render(request,"hod_template/manage_course_template.html",{"courses":courses})
@@ -566,3 +567,14 @@ def send_staff_notification(request):
     notification.save()
     print(data.text)
     return HttpResponse("True")
+
+def kick_student(student_id):
+    student=CustomUser.objects.get(id=student_id)
+    student.delete()
+    return HttpResponseRedirect(reverse("manage_student"))
+
+
+def kick_staff(staff_id):
+    staff=CustomUser.objects.get(id=staff_id)
+    staff.delete()
+    return HttpResponseRedirect(reverse("manage_staff"))

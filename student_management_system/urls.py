@@ -28,6 +28,7 @@ from student_management_system import settings
 urlpatterns = [
     #path('facecam_feed', face_recognition_views.facecam_feed, name='facecam_feed'),
     # path('',face_recognition_views.facecam_feed),
+    
     path('demo',views.showDemoPage),
     path('signup_admin',views.signup_admin,name="signup_admin"),
     path('signup_student',views.signup_student,name="signup_student"),
@@ -62,6 +63,8 @@ urlpatterns = [
     path('edit_subject_save', HodViews.edit_subject_save,name="edit_subject_save"),
     path('edit_course/<str:course_id>', HodViews.edit_course,name="edit_course"),
     path('edit_course_save', HodViews.edit_course_save,name="edit_course_save"),
+    path('kick_student/<str:student_id>', HodViews.kick_student,name="kick_student"),
+    path('kick_staff/<str:staff_id>', HodViews.kick_staff, name='kick_staff'),
     path('manage_session', HodViews.manage_session,name="manage_session"),
     path('add_session_save', HodViews.add_session_save,name="add_session_save"),
     path('check_email_exist', HodViews.check_email_exist,name="check_email_exist"),
@@ -85,8 +88,9 @@ urlpatterns = [
     path('admin_send_notification_student', HodViews.admin_send_notification_student,name="admin_send_notification_student"),
     path('send_student_notification', HodViews.send_student_notification,name="send_student_notification"),
     path('send_staff_notification', HodViews.send_staff_notification,name="send_staff_notification"),
-    path('tocamera', face_recognition_views.index, name='tocamera'),
-    path('facecam_feed', face_recognition_views.facecam_feed, name='facecam_feed'),
+    # path('tocamera', face_recognition_views.index, name='tocamera'),
+    # path('facecam_feed', face_recognition_views.facecam_feed, name='facecam_feed'),
+   
    
 
                   #     Staff URL Path

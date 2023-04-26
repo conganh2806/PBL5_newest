@@ -13,12 +13,14 @@ from django.urls import reverse
 from student_management_app.EmailBackEnd import EmailBackEnd
 from student_management_app.models import CustomUser, Courses, SessionYearModel
 from student_management_system import settings
+from student_management_app import ESP32
 
 
 def showDemoPage(request):
     return render(request,"demo.html")
 
 def ShowLoginPage(request):
+    ESP32.getFrame()
     return render(request,"login_page.html")
 
 def doLogin(request):
@@ -48,6 +50,7 @@ def doLogin(request):
         else:
             messages.error(request,"Invalid Login Details")
             return HttpResponseRedirect("/")
+        
 
 
 def GetUserDetails(request):
