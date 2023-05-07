@@ -12,7 +12,54 @@ from django.views.decorators.csrf import csrf_exempt
 
 from student_management_app.models import Subjects, SessionYearModel, Students, Attendance, AttendanceReport, \
     LeaveReportStaff, Staffs, FeedBackStaffs, CustomUser, Courses, NotificationStaffs, StudentResult, OnlineClassRoom
+    
+import numpy as np
+import cv2
+import pickle, face_recognition, urllib.request
+from background_task import background
 
+def predict(X_img, knn_clf=None, model_path=None, distance_threshold=0.6):
+    """
+    Recognizes faces in given image using a trained KNN classifier
+
+    :param knn_clf: (optional) a knn classifier object. if not specified, model_save_path must be specified.
+    :param model_path: (optional) path to a pickled knn classifier. if not specified, model_save_path must be knn_clf.
+    :param distance_threshold: (optional) distance threshold for face classification. the larger it is, the more chance
+           of mis-classifying an unknown person as a known one.
+    :return: a list of names and face locations for the recognized faces in the image: [(name, bounding box), ...].
+        For faces of unrecognized persons, the name 'unknown' will be returned.
+    """
+    
+
+    if knn_clf is None and model_path is None:
+        raise Exception(
+            "Must supply knn classifier either thourgh knn_clf or model_path")
+
+    # Load a trained KNN model (if one was passed in)
+    if knn_clf is None:
+        with open(model_path, 'rb') as f:
+            knn_clf = pickle.load(f)
+
+    # Load image file and find face locations
+    X_face_locations = face_recognition.face_locations(X_img)
+
+    # If no faces are found in the image, return an empty result.
+    if len(X_face_locations) == 0:
+        return []
+
+    # Find encodings for faces in the test iamge
+    faces_encodings = face_recognition.face_encodings(
+        X_img, known_face_locations=X_face_locations)
+
+    # Use the KNN model to find the best matches for the test face
+    closest_distances = knn_clf.kneighbors(faces_encodings, n_neighbors=1)
+    are_matches = [closest_distances[0][i][0] <=
+                   distance_threshold for i in range(len(X_face_locations))]
+    
+    
+
+    # Predict classes and remove classifications that aren't within the threshold
+    return [(pred, loc) if rec else ("unknown", loc) for pred, loc, rec in zip(knn_clf.predict(faces_encodings), X_face_locations, are_matches)]
 
 def staff_home(request):
     #For Fetch All Student Under Staff
@@ -64,20 +111,57 @@ def staff_take_attendance(request):
     session_years=SessionYearModel.object.all()
     return render(request,"staff_template/staff_take_attendance.html",{"subjects":subjects,"session_years":session_years})
 
-@csrf_exempt
+# @csrf_exempt
+# def get_students(request):
+#     subject_id=request.POST.get("subject")
+#     session_year=request.POST.get("session_year")
+
+#     subject=Subjects.objects.get(id=subject_id)
+#     session_model=SessionYearModel.object.get(id=session_year)
+#     students=Students.objects.filter(course_id=subject.course_id,session_year_id=session_model)
+#     list_data=[]
+
+#     for student in students:
+#         data_small={"id":student.admin.id,"name":student.admin.first_name+" "+student.admin.last_name}
+#         list_data.append(data_small)
+#     return JsonResponse(json.dumps(list_data),content_type="application/json",safe=False)
+
+@background(schedule=10)
 def get_students(request):
-    subject_id=request.POST.get("subject")
-    session_year=request.POST.get("session_year")
+    url = 'http://192.168.248.126/cam-hi.jpg' #url camera server here
+    while True:
+        img_resp = urllib.request.urlopen(url)
+        imgnp = np.array(bytearray(img_resp.read()), dtype=np.uint8)
+        frame = cv2.imdecode(imgnp, -1)
+        print("OK")
+        width = 640
+        height = 480
+        dim = (width, height)
 
-    subject=Subjects.objects.get(id=subject_id)
-    session_model=SessionYearModel.object.get(id=session_year)
-    students=Students.objects.filter(course_id=subject.course_id,session_year_id=session_model)
-    list_data=[]
+        # resize image
+        resized = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
 
-    for student in students:
-        data_small={"id":student.admin.id,"name":student.admin.first_name+" "+student.admin.last_name}
-        list_data.append(data_small)
-    return JsonResponse(json.dumps(list_data),content_type="application/json",safe=False)
+        rgb_frame = resized[:, :, ::-1]
+
+        predictions = predict(
+            rgb_frame, model_path="trained_knn_model.clf", distance_threshold=0.4)
+        
+        list_data = []
+        #Xu li diem danh 
+        for id, (top, right, bottom, left) in predictions:
+            print(id)
+            student = Students.object.filter(id=id)
+            data_small={"id":student.admin.id,"name":student.admin.first_name+" "+student.admin.last_name}
+            if(data_small not in list_data):
+                list_data.append(data_small)
+            else:
+                pass
+                
+        return JsonResponse(json.dumps(list_data),content_type="application/json",safe=False)    
+    
+    
+    
+  
 
 @csrf_exempt
 def save_attendance_data(request):

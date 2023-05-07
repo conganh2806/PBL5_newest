@@ -79,6 +79,15 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            {% url 'student_attendance_status' as student_attendance_status %}
+            <a href="{{ student_attendance_status }}" class="nav-link {% if request.path == student_attendance_status %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Check Attendance Status
+              </p>
+            </a>
+          </li>
 
         </ul>
       </nav>

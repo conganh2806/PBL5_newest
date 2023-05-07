@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 import pyrebase
+from student_management_app import ESP32
 
 from student_management_app.models import Students, Courses, Subjects, CustomUser, Attendance, AttendanceReport, \
     LeaveReportStudent, FeedBackStudent, NotificationStudent, StudentResult, OnlineClassRoom, SessionYearModel
@@ -176,3 +177,10 @@ def student_view_result(request):
     student=Students.objects.get(admin=request.user.id)
     studentresult=StudentResult.objects.filter(student_id=student.id)
     return render(request,"student_template/student_result.html",{"studentresult":studentresult})
+
+
+# def student_view_status(request):
+#     #receive name and send to view
+#     student_id = ESP32.get
+    
+#     return render(request,"student_template/student_status.html")

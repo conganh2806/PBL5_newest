@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 
-from student_management_app import views, HodViews, StaffViews, StudentViews, face_recognition_views
+from student_management_app import views, HodViews, StaffViews, StudentViews, face_recognition_views, ESP32
 from student_management_app.EditResultVIewClass import EditResultViewClass
 from student_management_system import settings
 
@@ -88,8 +88,7 @@ urlpatterns = [
     path('admin_send_notification_student', HodViews.admin_send_notification_student,name="admin_send_notification_student"),
     path('send_student_notification', HodViews.send_student_notification,name="send_student_notification"),
     path('send_staff_notification', HodViews.send_staff_notification,name="send_staff_notification"),
-    # path('tocamera', face_recognition_views.index, name='tocamera'),
-    # path('facecam_feed', face_recognition_views.facecam_feed, name='facecam_feed'),
+    
    
    
 
@@ -114,8 +113,11 @@ urlpatterns = [
     path('save_student_result', StaffViews.save_student_result, name="save_student_result"),
     path('edit_student_result',EditResultViewClass.as_view(), name="edit_student_result"),
     path('fetch_result_student',StaffViews.fetch_result_student, name="fetch_result_student"),
+    path('tocamera', face_recognition_views.index, name='tocamera'),
+    path('facecam_feed', face_recognition_views.facecam_feed, name='facecam_feed'),
     path('start_live_classroom',StaffViews.start_live_classroom, name="start_live_classroom"),
     path('start_live_classroom_process',StaffViews.start_live_classroom_process, name="start_live_classroom_process"),
+    
 
 
     path('student_home', StudentViews.student_home, name="student_home"),
@@ -132,6 +134,8 @@ urlpatterns = [
     path('student_all_notification',StudentViews.student_all_notification,name="student_all_notification"),
     path('student_view_result',StudentViews.student_view_result,name="student_view_result"),
     path('join_class_room/<int:subject_id>/<int:session_year_id>',StudentViews.join_class_room,name="join_class_room"),
+    path('student_attendance_status',ESP32.getFrame, name="student_attendance_status"),
+
     path('node_modules/canvas-designer/widget.html',StaffViews.returnHtmlWidget,name="returnHtmlWidget"),
     path('testurl/',views.Testurl)
     

@@ -10,6 +10,8 @@ import os
 import os.path
 import pickle
 from background_task import background
+import requests
+from student_management_app.models import Attendance, Students
 	
 
 def predict(X_img, knn_clf=None, model_path=None, distance_threshold=0.6):
@@ -55,9 +57,9 @@ def predict(X_img, knn_clf=None, model_path=None, distance_threshold=0.6):
     # Predict classes and remove classifications that aren't within the threshold
     return [(pred, loc) if rec else ("unknown", loc) for pred, loc, rec in zip(knn_clf.predict(faces_encodings), X_face_locations, are_matches)]
 
-@background(schedule=60)
-def getFrame():
-    url = 'http://192.168.1.96/cam-hi.jpg'
+@background(schedule=10)
+def getFrame(requests):
+    url = 'http://192.168.248.126/cam-hi.jpg'
     while True:
         img_resp = urllib.request.urlopen(url)
         imgnp = np.array(bytearray(img_resp.read()), dtype=np.uint8)
@@ -77,6 +79,10 @@ def getFrame():
         #Xu li diem danh 
         for name, (top, right, bottom, left) in predictions:
             print(name)
+  
+    
+    
+    
     #     for name, (top, right, bottom, left) in predictions:
     #         # Draw a box around the face
     #         cv2.rectangle(resized, (left, top),
@@ -99,57 +105,57 @@ def getFrame():
 
 
 
-# class FaceDetect(object):
-#     def __init__(self):
-#         # change the IP address below according to the
-#         # IP shown in the Serial monitor of Arduino code
-#         self.url = 'http://192.168.1.96/cam-hi.jpg'
+class FaceDetect(object):
+    def __init__(self):
+        # change the IP address below according to the
+        # IP shown in the Serial monitor of Arduino code
+        self.url = 'http://192.168.1.96/cam-hi.jpg'
  
     
-#     def __del__(self):
-#         cv2.destroyAllWindows()
+    def __del__(self):
+        cv2.destroyAllWindows()
         
         
-#     def get_frame(self):
+    def get_frame(self):
         
-# 		# grab the frame from the threaded video stream
-#         img_resp = urllib.request.urlopen(self.url)
-#         imgnp = np.array(bytearray(img_resp.read()), dtype=np.uint8)
-#         frame = cv2.imdecode(imgnp, -1)
-#         #frame = cv2.flip(frame,1)
+		# grab the frame from the threaded video stream
+        img_resp = urllib.request.urlopen(self.url)
+        imgnp = np.array(bytearray(img_resp.read()), dtype=np.uint8)
+        frame = cv2.imdecode(imgnp, -1)
+        #frame = cv2.flip(frame,1)
 
-# 		# resize the frame to have a width of 600 pixels (while
-# 		# maintaining the aspect ratio), and then grab the image
-# 		# dimensions
-#         width = 640
-#         height = 480
-#         dim = (width, height)
+		# resize the frame to have a width of 600 pixels (while
+		# maintaining the aspect ratio), and then grab the image
+		# dimensions
+        width = 640
+        height = 480
+        dim = (width, height)
 
-# 		# # resize image
-#         resized = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
+		# # resize image
+        resized = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
 
-#         rgb_frame = resized[:, :, ::-1]
+        rgb_frame = resized[:, :, ::-1]
 
-#         predictions = predict( rgb_frame, model_path="trained_knn_model.clf", distance_threshold=0.4)
+        predictions = predict( rgb_frame, model_path="trained_knn_model.clf", distance_threshold=0.4)
         
-#         for name, (top, right, bottom, left) in predictions:
-#             #Draw a box around the face
-#             cv2.rectangle(resized, (left, top),
-#                         (right, bottom), (0, 0, 255), 2)
+        for name, (top, right, bottom, left) in predictions:
+            #Draw a box around the face
+            cv2.rectangle(resized, (left, top),
+                        (right, bottom), (0, 0, 255), 2)
 
-#             # Draw a label with a name below the face
-#             cv2.rectangle(resized, (left, bottom - 35),
-#                         (right, bottom), (0, 0, 255), cv2.FILLED)
-#             font = cv2.FONT_HERSHEY_DUPLEX
-#             cv2.putText(resized, name, (left + 6, bottom - 6),
-#                         font, 1.0, (255, 255, 255), 1)
+            # Draw a label with a name below the face
+            cv2.rectangle(resized, (left, bottom - 35),
+                        (right, bottom), (0, 0, 255), cv2.FILLED)
+            font = cv2.FONT_HERSHEY_DUPLEX
+            cv2.putText(resized, name, (left + 6, bottom - 6),
+                        font, 1.0, (255, 255, 255), 1)
             
-#             ser.write(name.encode())
+            ser.write(name.encode())
             
             
-#         ret, jpeg = cv2.imencode('.jpg', resized)
+        ret, jpeg = cv2.imencode('.jpg', resized)
             
-#         return jpeg.tobytes()  
+        return jpeg.tobytes()  
         
         
   

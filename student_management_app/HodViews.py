@@ -569,12 +569,12 @@ def send_staff_notification(request):
     return HttpResponse("True")
 
 def kick_student(student_id):
-    student=CustomUser.objects.get(id=student_id)
-    student.delete()
+    # student=Students.objects.get(admin=student_id)
+    # student.admin.delete()
     return HttpResponseRedirect(reverse("manage_student"))
 
 
 def kick_staff(staff_id):
-    staff=CustomUser.objects.get(id=staff_id)
-    staff.delete()
+    # staff=Staffs.objects.get(admin=staff_id)
+    # staff.admin.delete()
     return HttpResponseRedirect(reverse("manage_staff"))
