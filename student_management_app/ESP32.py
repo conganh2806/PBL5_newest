@@ -1,3 +1,4 @@
+import datetime
 import cv2
 import urllib.request
 import numpy as np
@@ -11,7 +12,7 @@ import os.path
 import pickle
 from background_task import background
 import requests
-from student_management_app.models import Attendance, Students
+from student_management_app.models import Attendance, AttendanceReport, Students, Subjects
 	
 
 def predict(X_img, knn_clf=None, model_path=None, distance_threshold=0.6):
@@ -58,8 +59,8 @@ def predict(X_img, knn_clf=None, model_path=None, distance_threshold=0.6):
     return [(pred, loc) if rec else ("unknown", loc) for pred, loc, rec in zip(knn_clf.predict(faces_encodings), X_face_locations, are_matches)]
 
 @background(schedule=10)
-def getFrame(requests):
-    url = 'http://192.168.248.126/cam-hi.jpg'
+def getFrame():
+    url = 'http://192.168.1.99/cam-hi.jpg'
     while True:
         img_resp = urllib.request.urlopen(url)
         imgnp = np.array(bytearray(img_resp.read()), dtype=np.uint8)
@@ -77,8 +78,40 @@ def getFrame(requests):
         predictions = predict(
             rgb_frame, model_path="trained_knn_model.clf", distance_threshold=0.4)
         #Xu li diem danh 
-        for name, (top, right, bottom, left) in predictions:
-            print(name)
+        for id, (top, right, bottom, left) in predictions:
+            print(id)
+            id=1
+            if(id != None):
+                student = Students.objects.get(id=id)
+                print(student.course_id_id)
+                subject_model = Subjects.objects.filter(course_id=student.course_id_id)
+                print(subject_model)
+                for subject in subject_model:
+                    print(subject.id)
+                    attendance_date=datetime.date.today()
+                    print(student.session_year_id.id)
+                    if not Attendance.objects.filter(subject_id=subject,attendance_date=attendance_date,session_year_id=student.session_year_id).exists():
+                        attendance=Attendance(subject_id=subject,attendance_date=attendance_date,session_year_id=student.session_year_id) 
+                        attendance.save()
+                        print("Done save attendance")
+                        attendance_report=AttendanceReport(student_id=student,attendance_id=attendance,status=True)
+                        attendance_report.save()
+                        print("Done save attendance report")
+                    else:
+                        print("Student already check attendance today")
+                        pass
+    
+    
+           
+    #     try:
+    #         attendance=Attendance(subject_id=subject_model,attendance_date=attendance_date,session_year_id=student.session_year_id) 
+    #         attendance.save()
+    #         attendance_report=AttendanceReport(student_id=student,attendance_id=attendance,status=True)
+    #         attendance_report.save()
+            
+    #         print("Done")
+    #     except:
+    #         print("error")
   
     
     
@@ -150,7 +183,7 @@ class FaceDetect(object):
             cv2.putText(resized, name, (left + 6, bottom - 6),
                         font, 1.0, (255, 255, 255), 1)
             
-            ser.write(name.encode())
+            #ser.write(name.encode())
             
             
         ret, jpeg = cv2.imencode('.jpg', resized)
