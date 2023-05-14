@@ -61,6 +61,7 @@ def predict(X_img, knn_clf=None, model_path=None, distance_threshold=0.6):
 @background(schedule=10)
 def getFrame():
     url = 'http://192.168.1.99/cam-hi.jpg'
+    print("Running bg task .... ")
     while True:
         img_resp = urllib.request.urlopen(url)
         imgnp = np.array(bytearray(img_resp.read()), dtype=np.uint8)
@@ -79,9 +80,8 @@ def getFrame():
             rgb_frame, model_path="trained_knn_model.clf", distance_threshold=0.4)
         #Xu li diem danh 
         for id, (top, right, bottom, left) in predictions:
-            print(id)
-            id=1
-            if(id != None):
+            print("Id student: ", id)
+            if(id != "unknown"):
                 student = Students.objects.get(id=id)
                 print(student.course_id_id)
                 subject_model = Subjects.objects.filter(course_id=student.course_id_id)
@@ -91,12 +91,13 @@ def getFrame():
                     attendance_date=datetime.date.today()
                     print(student.session_year_id.id)
                     if not Attendance.objects.filter(subject_id=subject,attendance_date=attendance_date,session_year_id=student.session_year_id).exists():
-                        attendance=Attendance(subject_id=subject,attendance_date=attendance_date,session_year_id=student.session_year_id) 
-                        attendance.save()
-                        print("Done save attendance")
-                        attendance_report=AttendanceReport(student_id=student,attendance_id=attendance,status=True)
-                        attendance_report.save()
-                        print("Done save attendance report")
+                        if not AttendanceReport.objects.filter(student_id=student).exists():
+                            attendance=Attendance(subject_id=subject,attendance_date=attendance_date,session_year_id=student.session_year_id) 
+                            attendance.save()
+                            print("Done save attendance")
+                            attendance_report=AttendanceReport(student_id=student,attendance_id=attendance,status=True)
+                            attendance_report.save()
+                            print("Done save attendance report")
                     else:
                         print("Student already check attendance today")
                         pass
@@ -142,7 +143,7 @@ class FaceDetect(object):
     def __init__(self):
         # change the IP address below according to the
         # IP shown in the Serial monitor of Arduino code
-        self.url = 'http://192.168.1.96/cam-hi.jpg'
+        self.url = 'http://192.168.1.99/cam-hi.jpg'
  
     
     def __del__(self):

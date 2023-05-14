@@ -111,58 +111,22 @@ def staff_take_attendance(request):
     session_years=SessionYearModel.object.all()
     return render(request,"staff_template/staff_take_attendance.html",{"subjects":subjects,"session_years":session_years})
 
-# @csrf_exempt
-# def get_students(request):
-#     subject_id=request.POST.get("subject")
-#     session_year=request.POST.get("session_year")
-
-#     subject=Subjects.objects.get(id=subject_id)
-#     session_model=SessionYearModel.object.get(id=session_year)
-#     students=Students.objects.filter(course_id=subject.course_id,session_year_id=session_model)
-#     list_data=[]
-
-#     for student in students:
-#         data_small={"id":student.admin.id,"name":student.admin.first_name+" "+student.admin.last_name}
-#         list_data.append(data_small)
-#     return JsonResponse(json.dumps(list_data),content_type="application/json",safe=False)
-
-@background(schedule=10)
+@csrf_exempt
 def get_students(request):
-    url = 'http://192.168.248.126/cam-hi.jpg' #url camera server here
-    while True:
-        img_resp = urllib.request.urlopen(url)
-        imgnp = np.array(bytearray(img_resp.read()), dtype=np.uint8)
-        frame = cv2.imdecode(imgnp, -1)
-        print("OK")
-        width = 640
-        height = 480
-        dim = (width, height)
+    subject_id=request.POST.get("subject")
+    session_year=request.POST.get("session_year")
 
-        # resize image
-        resized = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
+    subject=Subjects.objects.get(id=subject_id)
+    session_model=SessionYearModel.object.get(id=session_year)
+    students=Students.objects.filter(course_id=subject.course_id,session_year_id=session_model)
+    list_data=[]
 
-        rgb_frame = resized[:, :, ::-1]
+    for student in students:
+        data_small={"id":student.admin.id,"name":student.admin.first_name+" "+student.admin.last_name}
+        list_data.append(data_small)
+    return JsonResponse(json.dumps(list_data),content_type="application/json",safe=False)
 
-        predictions = predict(
-            rgb_frame, model_path="trained_knn_model.clf", distance_threshold=0.4)
-        
-        list_data = []
-        #Xu li diem danh 
-        for id, (top, right, bottom, left) in predictions:
-            print(id)
-            student = Students.object.filter(id=id)
-            data_small={"id":student.admin.id,"name":student.admin.first_name+" "+student.admin.last_name}
-            if(data_small not in list_data):
-                list_data.append(data_small)
-            else:
-                pass
-                
-        return JsonResponse(json.dumps(list_data),content_type="application/json",safe=False)    
     
-    
-    
-  
-
 @csrf_exempt
 def save_attendance_data(request):
     student_ids=request.POST.get("student_ids")

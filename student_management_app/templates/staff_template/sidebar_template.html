@@ -41,6 +41,15 @@
                 Take Attendance
               </p>
             </a>
+          </li> 
+          <li class="nav-item">
+            {% url 'tocamera' as tocamera %}
+            <a href="{{ tocamera }}" class="nav-link {% if request.path == tocamera %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                View Camera
+              </p>
+            </a>
           </li>
           <li class="nav-item">
             {% url 'staff_update_attendance' as staff_update_attendance %}

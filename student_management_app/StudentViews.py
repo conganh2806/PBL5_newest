@@ -178,9 +178,3 @@ def student_view_result(request):
     studentresult=StudentResult.objects.filter(student_id=student.id)
     return render(request,"student_template/student_result.html",{"studentresult":studentresult})
 
-
-# def student_view_status(request):
-#     #receive name and send to view
-#     student_id = ESP32.get
-    
-#     return render(request,"student_template/student_status.html")

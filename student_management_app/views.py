@@ -20,7 +20,6 @@ def showDemoPage(request):
     return render(request,"demo.html")
 
 def ShowLoginPage(request):
-    ESP32.getFrame()
     return render(request,"login_page.html")
 
 def doLogin(request):

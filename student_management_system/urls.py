@@ -95,6 +95,8 @@ urlpatterns = [
                   #     Staff URL Path
     path('staff_home', StaffViews.staff_home, name="staff_home"),
     path('staff_take_attendance', StaffViews.staff_take_attendance, name="staff_take_attendance"),
+    path('tocamera', face_recognition_views.index, name='tocamera'),
+    path('facecam_feed', face_recognition_views.facecam_feed, name='facecam_feed'),
     path('staff_update_attendance', StaffViews.staff_update_attendance, name="staff_update_attendance"),
     path('get_students', StaffViews.get_students, name="get_students"),
     path('get_attendance_dates', StaffViews.get_attendance_dates, name="get_attendance_dates"),
@@ -113,8 +115,6 @@ urlpatterns = [
     path('save_student_result', StaffViews.save_student_result, name="save_student_result"),
     path('edit_student_result',EditResultViewClass.as_view(), name="edit_student_result"),
     path('fetch_result_student',StaffViews.fetch_result_student, name="fetch_result_student"),
-    path('tocamera', face_recognition_views.index, name='tocamera'),
-    path('facecam_feed', face_recognition_views.facecam_feed, name='facecam_feed'),
     path('start_live_classroom',StaffViews.start_live_classroom, name="start_live_classroom"),
     path('start_live_classroom_process',StaffViews.start_live_classroom_process, name="start_live_classroom_process"),
     
@@ -135,7 +135,6 @@ urlpatterns = [
     path('student_view_result',StudentViews.student_view_result,name="student_view_result"),
     path('join_class_room/<int:subject_id>/<int:session_year_id>',StudentViews.join_class_room,name="join_class_room"),
     path('student_attendance_status',ESP32.getFrame, name="student_attendance_status"),
-
     path('node_modules/canvas-designer/widget.html',StaffViews.returnHtmlWidget,name="returnHtmlWidget"),
     path('testurl/',views.Testurl)
     
