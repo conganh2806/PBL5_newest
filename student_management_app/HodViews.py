@@ -354,7 +354,8 @@ def edit_course_save(request):
 
 
 def manage_session(request):
-    return render(request,"hod_template/manage_session_template.html")
+    session_years = SessionYearModel.object.all()
+    return render(request,"hod_template/manage_session_template.html", {"session_years":session_years})
 
 def add_session_save(request):
     if request.method!="POST":
