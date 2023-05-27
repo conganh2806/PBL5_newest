@@ -1,15 +1,28 @@
 import datetime
 
+import pyrebase
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-import pyrebase
-from student_management_app import ESP32
 
-from student_management_app.models import Students, Courses, Subjects, CustomUser, Attendance, AttendanceReport, \
-    LeaveReportStudent, FeedBackStudent, NotificationStudent, StudentResult, OnlineClassRoom, SessionYearModel
+from student_management_app import tasks
+from student_management_app.models import (
+    Attendance,
+    AttendanceReport,
+    Courses,
+    CustomUser,
+    FeedBackStudent,
+    LeaveReportStudent,
+    NotificationStudent,
+    OnlineClassRoom,
+    SessionYearModel,
+    StudentResult,
+    Students,
+    Subjects,
+)
+
 
 def student_home(request):
     student_obj=Students.objects.get(admin=request.user.id)
