@@ -4,14 +4,13 @@ import os
 import os.path
 import pickle
 import urllib.request
+from timeit import default_timer as timer
 
 import cv2
 import face_recognition
 import numpy as np
 import pyrebase
-import requests
 from background_task import background
-from background_task.models import Task
 from face_recognition.face_recognition_cli import image_files_in_folder
 from sklearn import neighbors
 
@@ -56,7 +55,6 @@ def get_all_student():
     return students
 
 
-@background(schedule=0)
 def download_from_firebase():
     print("Downloading image to train from firebase ... ")
     student_folders = get_all_student()  # Lay cac thu muc tren storage ma duoc nop len
@@ -191,8 +189,8 @@ def train(
     return knn_clf
 
 
-@background(schedule=10)
 def training():
+    
     print("Training KNN classifier...")
 
     train_dir = "train_images"
@@ -204,6 +202,11 @@ def training():
         verbose=True,
     )
     print("Training complete!")
+    
+
+def preprocessing():
+    download_from_firebase()
+    training()
 
 
 def predict(X_img, knn_clf=None, model_path=None, distance_threshold=0.6):
@@ -249,69 +252,79 @@ def predict(X_img, knn_clf=None, model_path=None, distance_threshold=0.6):
 
     # Predict classes and remove classifications that aren't within the threshold
     return [
-        (pred, loc) if rec else ("unknown", loc)
+        (pred, loc) if rec else ("student_unknown", loc)
         for pred, loc, rec in zip(
             knn_clf.predict(faces_encodings), X_face_locations, are_matches
         )
     ]
 
 
-@background(schedule=60)
-def getFrame():
-    url = "http://192.168.1.99/cam-hi.jpg"
+@background(schedule=0)
+def detect_face():
+    preprocessing()
+    url = "http://192.168.1.9/cam-hi.jpg"
     print("Running bg task .... ")
-    img_resp = urllib.request.urlopen(url)
-    imgnp = np.array(bytearray(img_resp.read()), dtype=np.uint8)
-    frame = cv2.imdecode(imgnp, -1)
-    print("OK")
-    width = 640
-    height = 480
-    dim = (width, height)
+    
+    start_time= datetime.datetime.now()
+    
+    while True:
+        
+        img_resp = urllib.request.urlopen(url)
+        imgnp = np.array(bytearray(img_resp.read()), dtype=np.uint8)
+        frame = cv2.imdecode(imgnp, -1)
+        
+        width = 640
+        height = 480
+        dim = (width, height)
 
-    # resize image
-    resized = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
+        # resize image
+        resized = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
 
-    rgb_frame = resized[:, :, ::-1]
+        rgb_frame = resized[:, :, ::-1]
 
-    predictions = predict(
-        rgb_frame, model_path="trained_knn_model.clf", distance_threshold=0.4
-    )
-    # Xu li diem danh
-    for studentName_id, (top, right, bottom, left) in predictions:
-        id = studentName_id.split("_")[1]
-        print("Id student: ", id)
-        if id != "unknown":
-            student = Students.objects.get(id=id)
-            print(student.course_id_id)
-            subject_model = Subjects.objects.filter(course_id=student.course_id_id)
-            print(subject_model)
-            for subject in subject_model:
-                print(subject.id)
-                attendance_date = datetime.date.today()
-                print(student.session_year_id.id)
-                if not Attendance.objects.filter(
-                    subject_id=subject,
-                    attendance_date=attendance_date,
-                    session_year_id=student.session_year_id,
-                ).exists():
-                    if not AttendanceReport.objects.filter(student_id=student).exists():
-                        attendance = Attendance(
-                            subject_id=subject,
-                            attendance_date=attendance_date,
-                            session_year_id=student.session_year_id,
-                        )
-                        attendance.save()
-                        print("Done save attendance")
-                        attendance_report = AttendanceReport(
-                            student_id=student,
-                            attendance_id=attendance,
-                            status=True,
-                        )
-                        attendance_report.save()
-                        print("Done save attendance report")
-                else:
-                    print("Student already check attendance today")
-                    pass
+        predictions = predict(
+            rgb_frame, model_path="trained_knn_model.clf", distance_threshold=0.4
+        )
+        print("OK")
+        # Xu li diem danh
+        for studentName_id, (top, right, bottom, left) in predictions:
+            print("Xu li done")
+            id = studentName_id.split("_")[1]
+            print("Id student: ", id)
+            if id != "unknown":
+                student = Students.objects.get(id=id)
+                print("Student course id: ", student.course_id_id)
+                subject_model = Subjects.objects.filter(course_id=student.course_id_id)
+                print("subject model: ", subject_model)
+                for subject in subject_model:
+                    print("Subject id", subject.id)
+                    attendance_date = datetime.datetime.today().date()
+                    print(student.session_year_id.id)
+                    if not Attendance.objects.filter(subject_id=subject,attendance_date=attendance_date,session_year_id=student.session_year_id).exists():
+                        if not AttendanceReport.objects.filter(student_id=student, created_at=attendance_date).exists():
+                            attendance=Attendance(subject_id=subject,attendance_date=attendance_date,session_year_id=student.session_year_id) 
+                            attendance.save()
+                            print("Done save attendance")
+                            attendance_report=AttendanceReport(student_id=student,attendance_id=attendance,status=True)
+                            attendance_report.save()
+                            print("Done save attendance report")
+                        else:
+                            print("test")
+                    else:
+                        print("Student already check attendance today")
+                        pass
+            else:
+                print("Student not found!")
+        detect_face_running_time = datetime.datetime.now()
+        
+        elapsed_time =  detect_face_running_time - start_time
+        print(elapsed_time.seconds)
+        if elapsed_time.seconds >= 86400:
+            break
+         
+       
+        
+        
 
     #     try:
     #         attendance=Attendance(subject_id=subject_model,attendance_date=attendance_date,session_year_id=student.session_year_id)
@@ -348,7 +361,7 @@ class FaceDetect(object):
     def __init__(self):
         # change the IP address below according to the
         # IP shown in the Serial monitor of Arduino code
-        self.url = "http://192.168.1.99/cam-hi.jpg"
+        self.url = "http://192.168.1.9/cam-hi.jpg"
 
     def __del__(self):
         cv2.destroyAllWindows()

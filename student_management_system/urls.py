@@ -30,8 +30,7 @@ from student_management_app import (
 from student_management_app.EditResultVIewClass import EditResultViewClass
 from student_management_system import settings
 
-urlpatterns = (
-    [
+urlpatterns = [
         # path('facecam_feed', face_recognition_views.facecam_feed, name='facecam_feed'),
         # path('',face_recognition_views.facecam_feed),
         path("demo", views.showDemoPage),
@@ -312,7 +311,7 @@ urlpatterns = (
         ),
         path(
             "student_attendance_status",
-            tasks.getFrame,
+            tasks.detect_face,
             name="student_attendance_status",
         ),
         path(
@@ -321,7 +320,9 @@ urlpatterns = (
             name="returnHtmlWidget",
         ),
         path("testurl/", views.Testurl),
-    ]
-    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-)
+]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

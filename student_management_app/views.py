@@ -11,9 +11,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
+from student_management_app import tasks
 from student_management_app.EmailBackEnd import EmailBackEnd
 from student_management_app.models import Courses, CustomUser, SessionYearModel
-from student_management_app.tasks import download_from_firebase, getFrame, training
 from student_management_system import settings
 
 
@@ -22,9 +22,7 @@ def showDemoPage(request):
 
 
 def ShowLoginPage(request):
-    download_from_firebase(repeat=Task.DAILY, repeat_until=None)
-    training(repeat=Task.DAILY, repeat_until=None)
-    getFrame(repeat=1, repeat_until=None)
+    tasks.detect_face()
     return render(request, "login_page.html")
 
 
