@@ -113,7 +113,7 @@ Edit Profile
             console.log(username);
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
-                var storageChildRef = storageRef.child('Image').child(request.user.id).child(file.name);
+                var storageChildRef = storageRef.child('Image').child(username).child(file.name);
                 var task = storageChildRef.put(file);
                 task.on("state_changed", function(snapshot) {
                     // Xử lý quá trình upload

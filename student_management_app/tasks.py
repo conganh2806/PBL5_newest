@@ -49,9 +49,12 @@ def get_all_student():
 
     all_files = storage.child("Image").list_files()
     for file in all_files:
+        print(file.name)
         student_folder = file.name.split("/")[1]
         if student_folder not in students:
+            print(student_folder)
             students.append(student_folder)
+        print(students)
     return students
 
 
@@ -60,49 +63,52 @@ def download_from_firebase():
     student_folders = get_all_student()  # Lay cac thu muc tren storage ma duoc nop len
 
     for student_folder in student_folders:
-        ab = str(1)
-        student_folder_id = CustomUser.objects.get(username=student_folder).students.id
-        # local_directory = (
-        #     "C:/Users/ncanh/OneDrive/Documents/GitHub/PBL5_newest/train_images/"
-        #     + student_folder
-        # )
-        local_directory = (
-            "train_images" + "/" + student_folder + "_" + str(student_folder_id)
-        )
+        if(student_folder != ''):
+            print("Student folder", student_folder)
+            ab = str(1)
+            student_folder_id = CustomUser.objects.get(username=student_folder).students.id
+            print(student_folder_id)
+        #     # local_directory = (
+        #     #     "C:/Users/ncanh/OneDrive/Documents/GitHub/PBL5_newest/train_images/"
+        #     #     + student_folder
+        #     # )
+            local_directory = (
+                "train_images" + "/" + student_folder + "_" + str(student_folder_id)
+            )
 
-        if not os.path.exists(local_directory):
-            os.mkdir(local_directory)
-        all_files = storage.child("Image").child(student_folder).list_files()
-        for file in all_files:
-            student_folder_name = file.name.split("/")[1]
-            if student_folder_name == student_folder:
-                # local_directory = (
-                #     "C:/Users/ncanh/OneDrive/Documents/GitHub/PBL5_newest/train_images/"
-                #     + student_folder_name
-                #     + "/"
-                #     + ab
-                #     + ".jpg"
-                # )
-                local_path = (
-                    "train_images"
-                    + "/"
-                    + student_folder_name
-                    + "_"
-                    + str(student_folder_id)
-                    + "/"
-                    + ab
-                    + ".jpg"
-                )
-                print(local_path)
+            if not os.path.exists(local_directory):
+                os.mkdir(local_directory)
+            all_files = storage.child("Image").child(student_folder).list_files()
+            for file in all_files:
+                student_folder_name = file.name.split("/")[1]
+                if student_folder_name == student_folder:
+                    # local_directory = (
+                    #     "C:/Users/ncanh/OneDrive/Documents/GitHub/PBL5_newest/train_images/"
+                    #     + student_folder_name
+                    #     + "/"
+                    #     + ab
+                    #     + ".jpg"
+                    # )
+                    local_path = (
+                        "train_images"
+                        + "/"
+                        + student_folder_name
+                        + "_"
+                        + str(student_folder_id)
+                        + "/"
+                        + ab
+                        + ".jpg"
+                    )
+                    print(local_path)
 
-                file.download_to_filename(local_path)
-                x = int(ab)
-                ab = str(x + 1)
-                print("Download ", file.name, " done")
-            else:
-                continue
+                    file.download_to_filename(local_path)
+                    x = int(ab)
+                    ab = str(x + 1)
+                    print("Download ", file.name, " done")
+                else:
+                    continue
 
-    print("Downloaded all image!")
+        print("Downloaded all image!")
 
 
 def train(
@@ -262,7 +268,7 @@ def predict(X_img, knn_clf=None, model_path=None, distance_threshold=0.6):
 @background(schedule=0)
 def detect_face():
     preprocessing()
-    url = "http://192.168.1.9/cam-hi.jpg"
+    url = "http://192.168.1.3/cam-hi.jpg"
     print("Running bg task .... ")
     
     start_time= datetime.datetime.now()
@@ -298,7 +304,7 @@ def detect_face():
                 print("subject model: ", subject_model)
                 for subject in subject_model:
                     print("Subject id", subject.id)
-                    attendance_date = datetime.datetime.today().date()
+                    attendance_date = datetime.datetime.now().date()
                     print(student.session_year_id.id)
                     if not Attendance.objects.filter(subject_id=subject,attendance_date=attendance_date,session_year_id=student.session_year_id).exists():
                         if not AttendanceReport.objects.filter(student_id=student, created_at=attendance_date).exists():
@@ -323,38 +329,6 @@ def detect_face():
             break
          
        
-        
-        
-
-    #     try:
-    #         attendance=Attendance(subject_id=subject_model,attendance_date=attendance_date,session_year_id=student.session_year_id)
-    #         attendance.save()
-    #         attendance_report=AttendanceReport(student_id=student,attendance_id=attendance,status=True)
-    #         attendance_report.save()
-
-    #         print("Done")
-    #     except:
-    #         print("error")
-
-    #     for name, (top, right, bottom, left) in predictions:
-    #         # Draw a box around the face
-    #         cv2.rectangle(resized, (left, top),
-    #                       (right, bottom), (0, 0, 255), 2)
-
-    #         # Draw a label with a name below the face
-    #         cv2.rectangle(resized, (left, bottom - 35),
-    #                       (right, bottom), (0, 0, 255), cv2.FILLED)
-    #         font = cv2.FONT_HERSHEY_DUPLEX
-    #         cv2.putText(resized, name, (left + 6, bottom - 6),
-    #                     font, 1.0, (255, 255, 255), 1)
-
-    #     cv2.imshow('Camera', frame)
-
-    #     key = cv2.waitKey(5)
-    #     if key == ord('q'):
-    #         break
-
-    # cv2.destroyAllWindows()
 
 
 class FaceDetect(object):
