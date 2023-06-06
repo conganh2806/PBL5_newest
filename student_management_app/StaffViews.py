@@ -1,22 +1,37 @@
 import json
+import pickle
+import urllib.request
 from datetime import datetime
 from uuid import uuid4
 
+import cv2
+import face_recognition
+import numpy as np
+from background_task import background
 from django.contrib import messages
 from django.core import serializers
 from django.forms import model_to_dict
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-from student_management_app.models import Subjects, SessionYearModel, Students, Attendance, AttendanceReport, \
-    LeaveReportStaff, Staffs, FeedBackStaffs, CustomUser, Courses, NotificationStaffs, StudentResult, OnlineClassRoom
-    
-import numpy as np
-import cv2
-import pickle, face_recognition, urllib.request
-from background_task import background
+from student_management_app.models import (
+    Attendance,
+    AttendanceReport,
+    Courses,
+    CustomUser,
+    FeedBackStaffs,
+    LeaveReportStaff,
+    NotificationStaffs,
+    OnlineClassRoom,
+    SessionYearModel,
+    Staffs,
+    StudentResult,
+    Students,
+    Subjects,
+)
+
 
 def predict(X_img, knn_clf=None, model_path=None, distance_threshold=0.6):
     """

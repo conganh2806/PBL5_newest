@@ -267,12 +267,12 @@ def predict(X_img, knn_clf=None, model_path=None, distance_threshold=0.6):
 
 @background(schedule=0)
 def detect_face():
-    preprocessing()
-    url = "http://192.168.1.3/cam-hi.jpg"
+    #preprocessing()
+    url = "http://192.168.42.176/cam-hi.jpg"
     print("Running bg task .... ")
     
     start_time= datetime.datetime.now()
-    
+    id_done = []
     while True:
         
         img_resp = urllib.request.urlopen(url)
@@ -297,7 +297,8 @@ def detect_face():
             print("Xu li done")
             id = studentName_id.split("_")[1]
             print("Id student: ", id)
-            if id != "unknown":
+            if id != "unknown" and id not in id_done:
+                id_done.append(id)
                 student = Students.objects.get(id=id)
                 print("Student course id: ", student.course_id_id)
                 subject_model = Subjects.objects.filter(course_id=student.course_id_id)
@@ -306,21 +307,21 @@ def detect_face():
                     print("Subject id", subject.id)
                     attendance_date = datetime.datetime.now().date()
                     print(student.session_year_id.id)
-                    if not Attendance.objects.filter(subject_id=subject,attendance_date=attendance_date,session_year_id=student.session_year_id).exists():
-                        if not AttendanceReport.objects.filter(student_id=student, created_at=attendance_date).exists():
-                            attendance=Attendance(subject_id=subject,attendance_date=attendance_date,session_year_id=student.session_year_id) 
-                            attendance.save()
-                            print("Done save attendance")
-                            attendance_report=AttendanceReport(student_id=student,attendance_id=attendance,status=True)
-                            attendance_report.save()
-                            print("Done save attendance report")
-                        else:
-                            print("test")
+                    if not AttendanceReport.objects.filter(student_id=student, created_at=attendance_date).exists():
+                        #if not Attendance.objects.filter(subject_id=subject,attendance_date=attendance_date,session_year_id=student.session_year_id).exists():
+                        attendance=Attendance(subject_id=subject,attendance_date=attendance_date,session_year_id=student.session_year_id) 
+                        attendance.save()
+                        print("Done save attendance")
+                        attendance_report=AttendanceReport(student_id=student,attendance_id=attendance,status=True)
+                        attendance_report.save()
+                        print("Done save attendance report")
+                        # else:
+                        #     print("test")
                     else:
-                        print("Student already check attendance today")
                         pass
             else:
-                print("Student not found!")
+                print("Student already check attendance today")
+                continue
         detect_face_running_time = datetime.datetime.now()
         
         elapsed_time =  detect_face_running_time - start_time
