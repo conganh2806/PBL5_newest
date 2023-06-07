@@ -166,6 +166,11 @@ urlpatterns = [
             HodViews.send_staff_notification,
             name="send_staff_notification",
         ),
+        path(
+            "del",
+            HodViews.delst,
+            name="del",
+        ),
         #     Staff URL Path
         path("staff_home", StaffViews.staff_home, name="staff_home"),
         path(

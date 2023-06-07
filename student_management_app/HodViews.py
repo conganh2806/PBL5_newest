@@ -10,9 +10,22 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
 from student_management_app.forms import AddStudentForm, EditStudentForm
-from student_management_app.models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, \
-    FeedBackStudent, FeedBackStaffs, LeaveReportStudent, LeaveReportStaff, Attendance, AttendanceReport, \
-    NotificationStudent, NotificationStaffs
+from student_management_app.models import (
+    Attendance,
+    AttendanceReport,
+    Courses,
+    CustomUser,
+    FeedBackStaffs,
+    FeedBackStudent,
+    LeaveReportStaff,
+    LeaveReportStudent,
+    NotificationStaffs,
+    NotificationStudent,
+    SessionYearModel,
+    Staffs,
+    Students,
+    Subjects,
+)
 
 
 def admin_home(request):
@@ -579,3 +592,8 @@ def kick_staff(staff_id):
     # staff=Staffs.objects.get(admin=staff_id)
     # staff.admin.delete()
     return HttpResponseRedirect(reverse("manage_staff"))
+
+
+def delst(request):
+    Attendance.objects.all().delete()
+    AttendanceReport.objects.all().delete()

@@ -120,7 +120,7 @@
             </a>
           </li>
 
-           <li class="nav-item">
+           {% comment %} <li class="nav-item">
              {% url 'student_feedback_message' as student_feedback_message %}
             <a href="{% url 'student_feedback_message' %}" class="nav-link {% if request.path == student_feedback_message %} active {% endif %}">
               <i class="nav-icon fas fa-th"></i>
@@ -136,8 +136,8 @@
               <p>
                 Staff Feedback
               </p>
-            </a>
-          </li>
+            </a> {% endcomment %}
+          {% comment %} </li>
            <li class="nav-item">
                {% url 'student_leave_view' as student_leave_view %}
             <a href="{% url 'student_leave_view' %}" class="nav-link {% if request.path == student_leave_view %} active {% endif %}">
@@ -145,8 +145,8 @@
               <p>
                 Student Leave
               </p>
-            </a>
-          </li>
+            </a> {% endcomment %}
+          {% comment %} </li>
             <li class="nav-item">
                  {% url 'staff_leave_view' as staff_leave_view %}
             <a href="{% url 'staff_leave_view' %}" class="nav-link {% if request.path == staff_leave_view %} active {% endif %}">
@@ -155,7 +155,7 @@
                 Staff Leave
               </p>
             </a>
-          </li>
+          </li> {% endcomment %}
           <li class="nav-item">
             {% url 'admin_view_attendance' as admin_view_attendance %}
              <a href="{% url 'admin_view_attendance' %}" class="nav-link {% if request.path == admin_view_attendance %} active {% endif %}">
@@ -165,7 +165,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          {% comment %} <li class="nav-item">
             {% url 'admin_send_notification_staff' as admin_send_notification_staff %}
              <a href="{% url 'admin_send_notification_staff' %}" class="nav-link {% if request.path == admin_send_notification_staff %} active {% endif %}">
               <i class="nav-icon fas fa-th"></i>
@@ -173,8 +173,8 @@
                 Send Staff Notification
               </p>
             </a>
-          </li>
-          <li class="nav-item">
+          </li> {% endcomment %}
+          {% comment %} <li class="nav-item">
             {% url 'admin_send_notification_student' as admin_send_notification_student %}
              <a href="{% url 'admin_send_notification_student' %}" class="nav-link {% if request.path == admin_send_notification_student %} active {% endif %}">
               <i class="nav-icon fas fa-th"></i>
@@ -182,7 +182,16 @@
                 Send Student Notification
               </p>
             </a>
-          </li>
+          </li> {% endcomment %}
+          {% comment %} <li class="nav-item">
+            {% url 'del' as del %}
+             <a href="{% url 'del' %}" class="nav-link {% if request.path == del %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Delete some record
+              </p>
+            </a>
+          </li> {% endcomment %}
           
 
         </ul>

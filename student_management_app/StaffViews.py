@@ -180,21 +180,36 @@ def get_attendance_dates(request):
     session_year_obj=SessionYearModel.object.get(id=session_year_id)
     attendance=Attendance.objects.filter(subject_id=subject_obj,session_year_id=session_year_obj)
     attendance_obj=[]
+    attendance_dates = []
     for attendance_single in attendance:
-        data={"id":attendance_single.id,"attendance_date":str(attendance_single.attendance_date),"session_year_id":attendance_single.session_year_id.id}
-        attendance_obj.append(data)
-
+        if attendance_single.attendance_date not in attendance_dates:
+            attendance_dates.append(attendance_single.attendance_date)
+            data={"id":attendance_single.id,"attendance_date":str(attendance_single.attendance_date),"session_year_id":attendance_single.session_year_id.id}
+            attendance_obj.append(data)
+        else: 
+            continue
     return JsonResponse(json.dumps(attendance_obj),safe=False)
+
 
 @csrf_exempt
 def get_attendance_student(request):
-    attendance_date=request.POST.get("attendance_date")
-    attendance=Attendance.objects.get(id=attendance_date)
-
-    attendance_data=AttendanceReport.objects.filter(attendance_id=attendance)
+    attendance_inf=[]
+    attendees_no_duplicate = []
+    attendance_datetime = request.POST.get("attendance_date")
+    subject=request.POST.get("subject")
+    staff_id = request.user.id
+    attendance_datas=Attendance.objects.filter(attendance_date=attendance_datetime, subject_id=subject)
+    for attendance_data in attendance_datas:
+        attendee = AttendanceReport.objects.get(attendance_id_id=attendance_data.id)
+        if attendee.student_id not in attendees_no_duplicate:
+            attendance_inf.append(attendee)
+            attendees_no_duplicate.append(attendee.student_id)
+        else: 
+            continue
+            
     list_data=[]
 
-    for student in attendance_data:
+    for student in attendance_inf:
         data_small={"id":student.student_id.admin.id,"name":student.student_id.admin.first_name+" "+student.student_id.admin.last_name,"status":student.status}
         list_data.append(data_small)
     return JsonResponse(json.dumps(list_data),content_type="application/json",safe=False)

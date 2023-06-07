@@ -336,7 +336,7 @@ class FaceDetect(object):
     def __init__(self):
         # change the IP address below according to the
         # IP shown in the Serial monitor of Arduino code
-        self.url = "http://192.168.1.9/cam-hi.jpg"
+        self.url = "http://192.168.42.176/cam-hi.jpg"
 
     def __del__(self):
         cv2.destroyAllWindows()

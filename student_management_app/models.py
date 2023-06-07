@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
 # Create your models here.
 class SessionYearModel(models.Model):
     id=models.AutoField(primary_key=True)
@@ -156,6 +157,8 @@ class OnlineClassRoom(models.Model):
     is_active=models.BooleanField(default=True)
     created_on=models.DateTimeField(auto_now_add=True)
     objects=models.Manager()
+    
+
 
 
 @receiver(post_save,sender=CustomUser)

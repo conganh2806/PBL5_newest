@@ -86,7 +86,7 @@ View Update Attendance
                         var html_data="";
                         for(key in json_data)
                         {
-                            html_data+="<option value="+json_data[key]["id"]+">"+json_data[key]["attendance_date"]+"</option>";
+                            html_data+="<option value="+json_data[key]["attendance_date"]+">"+json_data[key]["attendance_date"]+"</option>";
                         }
                         $("#error_attendance").html("");
                         $("#error_attendance").hide();
@@ -116,13 +116,13 @@ View Update Attendance
 
 
         $("#fetch_student").click(function(){
-
+            var subject=$("#subject").val();
             var attendance_date=$("#attendance_date").val()
 
             $.ajax({
                 url:'{% url 'get_attendance_student' %}',
                 type:'POST',
-                data:{attendance_date:attendance_date},
+                data:{attendance_date:attendance_date,subject:subject},
             })
             .done(function(response){
                 var json_data=JSON.parse(response);
@@ -137,7 +137,7 @@ View Update Attendance
                     else{
                         div_data+="";
                     }
-                    div_data+="name='student_data[]' value='"+json_data[key]['id']+"'><label class='form-check-label'>"+json_data[key]['name']+"</label> ";
+                    div_data+="name='student_data[]' value='"+json_data[key]['name']+"'><label class='form-check-label'>"+json_data[key]['name']+"</label> ";
 
 
                      if(json_data[key]['status'])
